@@ -58,8 +58,6 @@ import java.util.zip.ZipFile;
 public class Utils {
 
     private static final String TAG = "Utils";
-    private static final String MAINTAINER_PROP = "ro.rising.maintainer";
-    private static final String MAINTAINER_NAME = SystemProperties.get(MAINTAINER_PROP);
 
     private static String mMaintainer;
     private static String mForum;
@@ -148,8 +146,7 @@ public class Utils {
             }
             try {
                 UpdateInfo update = parseJsonUpdate(updatesList.getJSONObject(i));
-                if ((!compatibleOnly || isCompatible(update)) 
-                    && mMaintainer.equals(MAINTAINER_NAME)) {
+                if (!compatibleOnly || isCompatible(update)) {
                     updates.add(update);
                 } else {
                     Log.d(TAG, "Ignoring incompatible update " + update.getName());
